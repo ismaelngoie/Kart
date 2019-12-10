@@ -31,6 +31,10 @@ namespace KartGame.KartSystems
         {
             get { return m_HopHeld; }
         }
+        public bool BoostHeld
+        {
+            get { return m_BoostHeld; }
+        }
 
         float m_Acceleration;
         float m_Steering;
@@ -38,6 +42,7 @@ namespace KartGame.KartSystems
         bool m_HopHeld;
         bool m_BoostPressed;
         bool m_FirePressed;
+        bool m_BoostHeld;
 
         bool m_FixedUpdateHappened;
 
@@ -53,7 +58,7 @@ namespace KartGame.KartSystems
             m_Steering = Input.GetAxis ("Horizontal");
 
             m_HopHeld = Input.GetButton ("Hop");
-
+            m_BoostHeld = Input.GetButton("Boost");
             if (m_FixedUpdateHappened)
             {
                 m_FixedUpdateHappened = false;
