@@ -20,7 +20,8 @@ namespace KartGame.KartSystems
         {
             NotDrifting,
             FacingLeft,
-            FacingRight
+            FacingRight,
+            Burnout
         }
 
 
@@ -467,6 +468,9 @@ namespace KartGame.KartSystems
             
             if (!groundInfo.isCapsuleTouching)
                 m_Velocity += Vector3.down * m_ModifiedStats.gravity * deltaTime;
+
+            if (m_DriftState == DriftState.Burnout)
+                m_Velocity = Vector3.zero;
         }
 
         /// <summary>
@@ -512,6 +516,12 @@ namespace KartGame.KartSystems
 
                     OnDriftStarted.Invoke ();
                 }
+            } else if (m_Input.BoostHeld && m_HasControl && m_DriftState == DriftState.NotDrifting)
+            {
+                    m_DriftState = DriftState.Burnout;
+
+                    OnDriftStarted.Invoke();
+           
             }
         }
 
